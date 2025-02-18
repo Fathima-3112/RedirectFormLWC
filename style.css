@@ -1,0 +1,22 @@
+
+.field-label{
+    width: min-content;
+    margin-right: 10px;
+}
+.form-title {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .spinner-container {
+    position: relative;
+  }
+  
+
+  .backgroundInverse {
+    position: relative;
+    background-color: #16325c;
+    height: 80px;
+}
+  

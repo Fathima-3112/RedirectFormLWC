@@ -1,0 +1,103 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid">
+            <div class="slds-align_absolute-center">
+                <label class="form-title slds-text-heading_large slds-align_absolute-center slds-var-m-top_large" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                  <b>ARHAUS</b>
+                </label>
+              </div>
+        </div>
+        <div class="slds-grid">
+            <div class="slds-align_absolute-center">
+              <label class="form-title slds-text-heading_large slds-align_absolute-center slds-var-m-top_medium" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                Redirect Request
+              </label>
+            </div>
+          </div><br>
+          <div class="spinner-container">
+            <form>
+                <lightning-accordion>
+
+                    <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-input class="field" name="submitterName" label="Submitter Name" value={submitterName} onchange={handleInputChange} required></lightning-input></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"> <lightning-input class="field" name="submitterEmail" label="Submitter Email" value={submitterEmail} onchange={handleInputChange} type="email" required></lightning-input></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-combobox class="field" name="redirectType" label="Redirect Type" value={redirectType} options={requestOptions} onchange={handleInputChange} required></lightning-combobox></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-input class="field" label="Client Last Name" name="clientLastName" value={clientLastName} onchange={handleInputChange} required></lightning-input></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-select class="field" data-id="fromHubNumber" name="fromHubNumber" label="From: Hub Number" value={fromHubNumber} options={hubOptions} onchange={handleInputChange} required>
+                                <option value="">Select Hub Number</option>
+                            </lightning-select></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-select class="field" data-id="toHubNumber" name="toHubNumber" label="To: Hub/DC Number" value={toHubNumber} options={hubOptions} onchange={handleInputChange} required>
+                                <option value="">Select Hub Number</option>
+                            </lightning-select></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-input class="field" name="orderNumber" label="Order Number" value={orderNumber} onchange={handleInputChange} required></lightning-input></div>
+                        </div>
+
+                        <div class="slds-size_1-of-4">
+                            <div class="slds-m-around_x-small"><lightning-combobox class="field" name="redirectReason" label="Why is this SKU/s being redirected?" value={redirectReason} options={redirectReasonOptions} onchange={handleInputChange} required></lightning-combobox></div>
+                        </div>
+
+                        <div class="slds-size_1-of-2">
+                            <div class="slds-m-around_x-small"><lightning-textarea class="field" name="comments" label="Additional Comments/ Client Requests regarding delivery" value={comments} onchange={handleInputChange}></lightning-textarea></div>
+                        </div>
+
+                        <div class="slds-size_1-of-2">
+                            <div class="slds-m-around_x-small"><lightning-combobox class="field" name="numberOfSKUs" label="Number of SKUs to be entered" value={numberOfSKUs} options={skuNumberOptions} onchange={handleSkuNumberChange} required></lightning-combobox></div>
+                        </div>
+
+
+                        <template for:each={skuFields} for:item="sku">
+                            <div key={sku.index} class="demo-only demo-only--sizing slds-grid slds-wrap slds-align_absolute-center">
+                                <div class="slds-size_1-of-4">
+                                    <div class="slds-m-around_x-small"><lightning-input class="field" label="SKU" data-index={sku.index} value={sku.sku} onchange={handleSkuChange} required></lightning-input></div>
+                                </div>
+                                <div class="slds-size_1-of-4">
+                                    <div class="slds-m-around_x-small"><lightning-input class="field" label="SERIAL" data-index={sku.index} value={sku.serial} onchange={handleSerialChange} required></lightning-input></div>       
+                                </div>
+                                <div class="slds-size_1-of-4">
+                                    <div class="slds-m-around_x-small"><lightning-input class="field" label="Measurement" data-index={sku.index} value={sku.measurement} required></lightning-input></div>
+                                </div>
+                                <div class="slds-size_1-of-4">
+                                    <div class="slds-m-around_x-small"><lightning-input class="field" label="SKU Weight" value={sku.weight} onchange={handleWeightChange} data-index={sku.index} required></lightning-input></div>
+                                </div>
+                            </div>
+                        </template>
+                            <br />
+                        <div class="slds-size_1-of-1 slds-text-align_center slds-var-m-top_medium"> <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button></div>
+
+                        <div class="spinner spinHolder">
+                            <template if:true={isLoading}>
+                                 <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                                 </lightning-spinner>
+                            </template>
+                        </div>
+
+                    </div>
+
+            </lightning-accordion>
+            </form>
+       
+          </div>
+          
+    </lightning-card>
+    
+</template>
